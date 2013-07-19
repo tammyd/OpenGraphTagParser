@@ -111,4 +111,15 @@ HTML;
         $this->assertCount(4, $parser->image);
         $this->assertInternalType('string', $parser->image[0]);
     }
+
+    public function testRussian() {
+        $html = file_get_contents('./OpenGraph/Tests/Fixtures/www.kommersant.ru.html');
+        $parser = new Parser($html);
+        $parser->parse($html);
+
+        $title = "Интернет-казино вписывают в реестр запрещенных сайтов // Роскомнадзору могут поручить блокировку азартных игр";
+        $this->assertEquals($title, $parser->title);
+        $this->assertEquals('article', $parser->type);
+    }
+
 }
